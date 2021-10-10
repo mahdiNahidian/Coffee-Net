@@ -1,0 +1,325 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package caffeenet;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author Asus
+ */
+public class CaffeeNet {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+        Master admin = new Master("admin", "admin");
+
+        Scanner input = new Scanner(System.in);
+
+        ArrayList<Members> members = new ArrayList<Members>();
+        ArrayList<Computers> computers = new ArrayList<Computers>();
+
+        members.add(new Members("member1", "123456", "ali", "mohammadi", 120000));
+        members.add(new Members("member2", "123456", "hasan", "alian", 250000));
+
+        computers.add(new Computers(1, "windows 10", "intel core i7", 7000, 0));
+        computers.add(new Computers(2, "Linux", "intel core i7", 11000, 2));
+
+        String un1;
+        final String pass1;
+        int opption;
+
+        JFrame f = new JFrame();
+        f.setTitle("Login");
+        f.setSize(300, 380);
+        f.setLayout(null);
+
+        JLabel l1 = new JLabel("Enter your user name:");
+        l1.setBounds(42, 60, 150, 20);
+        f.add(l1);
+
+        JTextField t1 = new JTextField();
+        t1.setBounds(42, 80, 200, 35);
+        t1.setBackground(Color.white);
+        f.add(t1);
+
+        JLabel l2 = new JLabel("Enter your password:");
+        l2.setBounds(42, 135, 150, 20);
+        f.add(l2);
+
+        JPasswordField pass = new JPasswordField();
+        pass.setBounds(42, 155, 200, 35);
+        pass.setBackground(Color.white);
+        f.add(pass);
+
+        JButton b = new JButton("Enter");
+        b.setBounds(88, 215, 100, 45);
+        b.addActionListener(null);
+        f.add(b);
+
+        JLabel l3 = new JLabel("your username or your password is wrong!");
+        l3.setBounds(13, 270, 250, 20);
+        l3.setForeground(Color.red);
+
+        b.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String un1 = t1.getText();
+                String pass1 = pass.getText();
+
+                int opption = -1;
+                if (un1.toLowerCase().equals("admin")) {
+                    if (pass1.toLowerCase().equals(admin.getPassword())) {
+                        opption = 1;
+                        f.remove(l3);
+                        f.setBackground(Color.gray);
+                    }
+                } else if (members.size() > 0) {
+                    for (int i = 0; i < members.size(); i++) {
+                        if (members.get(i).getUserName().toLowerCase().equals(un1.toLowerCase())) {
+                            if (members.get(i).getPassword().toLowerCase().equals(pass1.toLowerCase())) {
+                                opption = 2;
+                            }
+                        }
+                    }
+                }
+                if (opption == -1) {
+                    f.add(l3);
+                    f.setBackground(Color.yellow);
+                }
+                
+                int sw = 10;
+                
+                loop:
+                switch (opption) {
+                    case 1: {
+                        f.remove(l1);
+                        f.remove(l2);
+                        f.remove(t1);
+                        f.remove(pass);
+                        f.remove(b);
+
+                        f.setSize(600, 750);
+                        f.setTitle("Master Page");
+
+                        JLabel l4 = new JLabel("Welcome admin choose one of the options:");
+                        l4.setBounds(10, 20, 250, 30);
+                        f.add(l4);
+
+                        JLabel l5 = new JLabel("A) Management of Memberships info");
+                        l5.setBounds(11, 55, 250, 15);
+                        f.add(l5);
+
+                        JButton b2 = new JButton("1. Add a New Member");
+                        b2.setBounds(12, 75, 200, 40);
+                        f.add(b2);
+
+                        JButton b3 = new JButton("2. Show Members");
+                        b3.setBounds(12, 120, 200, 40);
+                        f.add(b3);
+
+                        JButton b4 = new JButton("3. Update Members");
+                        b4.setBounds(12, 165, 200, 40);
+                        f.add(b4);
+
+                        JButton b5 = new JButton("4. Delete Members");
+                        b5.setBounds(12, 210, 200, 40);
+                        f.add(b5);
+
+                        JButton b6 = new JButton("5. Search Members");
+                        b6.setBounds(12, 260, 200, 40);
+                        f.add(b6);
+
+                        JLabel l12 = new JLabel("B) Management of Computerships info");
+                        l12.setBounds(11, 55, 250, 15);
+                        f.add(l12);
+
+                        JButton b9 = new JButton("6. Add a New Computer");
+                        b9.setBounds(12, 75, 200, 40);
+                        f.add(b9);
+
+                        JButton b10 = new JButton("7. Show Computers list");
+                        b10.setBounds(12, 120, 200, 40);
+                        f.add(b10);
+
+                        JButton b11 = new JButton("8. Update Computers info");
+                        b11.setBounds(12, 165, 200, 40);
+                        f.add(b11);
+
+                        JButton b12 = new JButton("9. Delete Computers");
+                        b12.setBounds(12, 210, 200, 40);
+                        f.add(b12);
+
+                        JButton b13 = new JButton("10. Search Computers");
+                        b13.setBounds(12, 260, 200, 40);
+                        f.add(b13);
+
+                        JLabel l13 = new JLabel("C) Others");
+                        l13.setBounds(11, 55, 250, 15);
+                        f.add(l13);
+
+                        JButton b14 = new JButton("11. Change Password");
+                        b14.setBounds(12, 75, 200, 40);
+                        f.add(b14);
+
+                        JButton b15 = new JButton("12. Logout");
+                        b15.setBounds(12, 120, 200, 40);
+                        f.add(b15);
+
+                        b2.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                f.remove(l4);
+                                f.remove(l5);
+                                f.remove(b2);
+                                f.remove(b3);
+                                f.remove(b4);
+                                f.remove(b5);
+                                f.remove(b6);
+
+                                f.setSize(450, 600);
+                                f.setTitle("New Member");
+
+                                JLabel l6 = new JLabel("Add a New Member:");
+                                l6.setBounds(12, 20, 200, 40);
+                                f.add(l6);
+
+                                JLabel l7 = new JLabel("Enter username");
+                                l7.setBounds(12, 70, 200, 40);
+                                f.add(l7);
+                                JTextField t2 = new JTextField();
+                                t2.setBounds(12, 110, 200, 35);
+                                t2.setBackground(Color.white);
+                                f.add(t2);
+
+                                JLabel l8 = new JLabel("Enter password");
+                                l8.setBounds(12, 155, 200, 40);
+                                f.add(l8);
+                                JTextField t3 = new JTextField();
+                                t3.setBounds(12, 195, 200, 35);
+                                t3.setBackground(Color.white);
+                                f.add(t3);
+
+                                JLabel l9 = new JLabel("Enter name");
+                                l9.setBounds(12, 240, 200, 40);
+                                f.add(l9);
+                                JTextField t4 = new JTextField();
+                                t4.setBounds(12, 280, 200, 35);
+                                t4.setBackground(Color.white);
+                                f.add(t4);
+
+                                JLabel l10 = new JLabel("Enter last name");
+                                l10.setBounds(12, 325, 200, 40);
+                                f.add(l10);
+                                JTextField t5 = new JTextField();
+                                t5.setBounds(12, 365, 200, 35);
+                                t5.setBackground(Color.white);
+                                f.add(t5);
+
+                                JLabel l11 = new JLabel("Enter credit");
+                                l11.setBounds(12, 410, 200, 40);
+                                f.add(l11);
+                                JTextField t6 = new JTextField();
+                                t6.setBounds(12, 450, 200, 35);
+                                t6.setBackground(Color.white);
+                                f.add(t6);
+
+                                JButton b7 = new JButton("Cancel");
+                                b7.setBounds(12, 495, 100, 40);
+                                b7.setBackground(Color.BLACK);
+                                b7.setForeground(Color.white);
+                                f.add(b7);
+
+                                JButton b8 = new JButton("Confirm");
+                                b8.setBounds(322, 495, 100, 40);
+                                f.add(b8);
+
+                                b7.addActionListener(new ActionListener() {
+
+                                    @Override
+                                    @SuppressWarnings("UnnecessaryContinue")
+                                    public void actionPerformed(ActionEvent e) {
+                                        f.remove(l6);
+                                        f.remove(l7);
+                                        f.remove(l8);
+                                        f.remove(l9);
+                                        f.remove(l10);
+                                        f.remove(l11);
+                                        f.remove(t2);
+                                        f.remove(t3);
+                                        f.remove(t4);
+                                        f.remove(t5);
+                                        f.remove(t6);
+                                        f.remove(b7);
+                                        f.remove(b8);
+                                        f.setBackground(Color.yellow);
+                                    }  
+                                });
+                                
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+
+    }
+     public static void start() {
+     JFrame f = new JFrame();
+     f.setTitle("Login");
+     f.setSize(300, 380);
+     f.setLayout(null);
+        
+     JLabel l1 = new JLabel("Enter your user name:");
+     l1.setBounds(42, 60, 150, 20);
+     f.add(l1);
+        
+     JTextField t1 = new JTextField();
+     t1.setBounds(42, 80, 200, 35);
+     t1.setBackground(Color.white);
+     f.add(t1);
+        
+     JLabel l2 = new JLabel("Enter your password:");
+     l2.setBounds(42, 135, 150, 20);
+     f.add(l2);
+        
+     JPasswordField pass = new JPasswordField();
+     pass.setBounds(42, 155, 200, 35);
+     pass.setBackground(Color.white);
+     f.add(pass);
+        
+     JButton b = new JButton("Enter");
+     b.setBounds(88, 215, 100, 45);
+     b.addActionListener(null);
+     f.add(b);
+        
+     String un1 = t1.getText();
+     String pass1 = pass.getText();
+        
+     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     f.setVisible(true);
+        
+     }
+
+}
