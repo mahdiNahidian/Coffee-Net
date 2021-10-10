@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package caffeenet;
+
+/**
+ *
+ * @author Asus
+ */
+public class Computers {
+
+    private int systemNumber;
+    private String oSystem;
+    private String processor;
+    private int costPerHour;
+    private float hour;
+    
+    public Computers(int systemNumber, String oSystem, String processor, int costPerHour, float hour){
+        this.systemNumber = systemNumber;
+        this.oSystem = oSystem;
+        this.processor = processor;
+        this.costPerHour = costPerHour;
+        this.hour = hour;
+    }
+
+    public int getSystemNumber() {
+        return systemNumber;
+    }
+
+    public void setSystemNumber(int systemNumber) {
+        this.systemNumber = systemNumber;
+    }
+
+    public String getoSystem() {
+        return oSystem;
+    }
+
+    public void setoSystem(String oSystem) {
+        this.oSystem = oSystem;
+    }
+
+    public String getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(String processor) {
+        this.processor = processor;
+    }
+
+    public int getCostPerHour() {
+        return costPerHour;
+    }
+
+    public void setCostPerHour(int costPerHour) {
+        this.costPerHour = costPerHour;
+    }
+
+    public float getHour() {
+        return hour;
+    }
+
+    public void setHour(float hour) {
+        this.hour = hour;
+    }
+    
+    
+}
